@@ -1,5 +1,6 @@
 package com.divyansh.PortfolioPro.user.service;
 
+import com.divyansh.PortfolioPro.exception.EmailAlreadyExistException;
 import com.divyansh.PortfolioPro.user.dto.RegisterRequest;
 import com.divyansh.PortfolioPro.user.dto.UserResponse;
 import com.divyansh.PortfolioPro.user.entity.User;
@@ -22,7 +23,7 @@ public class UserService {
 
     public UserResponse registerUser(RegisterRequest request)  {
         if(userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already registered");
+            throw new EmailAlreadyExistException("Email already registered");
         }
 
         User user = new User();
